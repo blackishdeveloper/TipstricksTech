@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "697036898102",
+    "firebase_url": "https://tipsmaagictechapp.firebaseio.com",
+    "project_id": "tipsmaagictechapp",
+    "storage_bucket": "tipsmaagictechapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697036898102:android:3924c3e350ebb627",
+        "android_client_info": {
+          "package_name": "com.playapplication.tipstrickstech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697036898102-idafqm4srde0rshakm4iesfgpom458gh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.playapplication.tipstrickstech",
+            "certificate_hash": "e00627e0112fda9bb0da40b051b788c3c5bc290b"
+          }
+        },
+        {
+          "client_id": "697036898102-lasncq89hvt2vfhp8clclgfl9i5pdre5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-XO0xE8tCdTU0oO1YOKycb-p4FT1LNas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697036898102-lasncq89hvt2vfhp8clclgfl9i5pdre5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
