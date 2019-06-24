@@ -62,19 +62,21 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
 
-        } else {
+        }
+       else
+            {
             ActivityCompat.requestPermissions(RegisterActivity.this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     PregCode);
         }
 
-
-
     }
 
 
 
+
     }
+
 
 
 
