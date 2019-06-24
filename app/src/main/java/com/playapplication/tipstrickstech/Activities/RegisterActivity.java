@@ -17,6 +17,7 @@ import com.playapplication.tipstrickstech.R;
 public class RegisterActivity extends AppCompatActivity {
 
     ImageView ImgUserPhoto;
+    static int PregCode = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +69,12 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
 
+
     }
 
-}
+
+
+    }
+
 
 
