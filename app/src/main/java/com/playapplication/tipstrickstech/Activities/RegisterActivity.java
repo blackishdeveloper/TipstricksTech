@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -17,7 +18,15 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.playapplication.tipstrickstech.R;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -110,8 +119,56 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void CreateUserAccount(String email, String name, String password) {
+    private void CreateUserAccount(String email, final String name, String password) {
 
+        //created account
+
+        mAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+
+                            //user account
+                            showMessage("Account created");
+                            //update
+                            updateUserInfo(name ,pickedImgUri,mAuth.getCurrentUser());
+
+
+                        }
+                        else
+                        {
+                            //account failed
+                            showMessage("account creation failed" +task.getException().getMessage());
+                            regbtn.setVisibility(View.VISIBLE);
+                            loadingProgress.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
+
+
+    }
+
+    private void updateUserInfo(String name, Uri pickedImgUri, FirebaseUser currentUser) {
+
+     //storage
+        StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users Photos");
+        final StorageReference imageFilePath = mStorage.child(pickedImgUri.getLastPathSegment());
+        imageFilePath.getFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+
+                //image uploaded
+
+                imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+
+                    }
+                });
+            }
+        });
 
     }
 
