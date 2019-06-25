@@ -11,11 +11,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.playapplication.tipstrickstech.R;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -27,6 +29,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText userEmail,userPassword,userPassword2,userName;
     private ProgressBar loadingProgress;
+    private Button regbtn;
+
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -40,6 +45,51 @@ public class RegisterActivity extends AppCompatActivity {
         userPassword2 = findViewById(R.id.regPassword2);
         userName = findViewById(R.id.regName);
         loadingProgress = findViewById(R.id.progressBar);
+        regbtn = findViewById(R.id.regBtn);
+
+
+        loadingProgress.setVisibility(View.INVISIBLE);
+
+        mAuth =FirebaseAuth.getInstance();
+
+
+
+
+
+
+        regbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                regbtn.setVisibility(View.INVISIBLE);
+                loadingProgress.setVisibility(View.INVISIBLE);
+                final String email = userEmail.getText().toString();
+                final String password = userPassword.getText().toString();
+                final String password2 = userPassword2.getText().toString();
+                final String name = userName.getText().toString();
+
+                if (email.isEmpty() || name.isEmpty() || password.isEmpty() || !password.equals(password2)) {
+
+
+                    //something error comes all fields must be completed
+
+                    showMessage("please verify all fields");
+                    regbtn.setVisibility(View.VISIBLE);
+                    loadingProgress.setVisibility(View.INVISIBLE);
+
+
+                }
+                else {
+                    //createaccount
+
+                    CreateUserAccount(email,name,password);
+
+                }
+            }
+
+        });
+
+
 
         ImgUserPhoto = findViewById(R.id.regUserProfile);
 
@@ -58,6 +108,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void CreateUserAccount(String email, String name, String password) {
+
+
+    }
+
+    private void showMessage(String message) {
+
+        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
     }
 
     private void openGallery() {
