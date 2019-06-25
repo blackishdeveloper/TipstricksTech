@@ -11,7 +11,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.playapplication.tipstrickstech.R;
@@ -23,6 +25,9 @@ public class RegisterActivity extends AppCompatActivity {
     static int REQUESCODE = 1;
     Uri pickedImgUri ;
 
+    private EditText userEmail,userPassword,userPassword2,userName;
+    private ProgressBar loadingProgress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,11 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //img view
+        userEmail = findViewById(R.id.regEmail);
+        userPassword = findViewById(R.id.regPassword);
+        userPassword2 = findViewById(R.id.regPassword2);
+        userName = findViewById(R.id.regName);
+        loadingProgress = findViewById(R.id.progressBar);
 
         ImgUserPhoto = findViewById(R.id.regUserProfile);
 
