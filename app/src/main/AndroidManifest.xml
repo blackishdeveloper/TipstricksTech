@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.playapplication.tipstrickstech">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-
-
+        <activity android:name=".Activities.HomeActivity"></activity>
         <activity android:name=".Activities.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

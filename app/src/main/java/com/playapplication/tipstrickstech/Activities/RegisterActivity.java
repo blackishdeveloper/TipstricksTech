@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -71,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 regbtn.setVisibility(View.INVISIBLE);
-                loadingProgress.setVisibility(View.INVISIBLE);
+                loadingProgress.setVisibility(View.VISIBLE);
                 final String email = userEmail.getText().toString();
                 final String password = userPassword.getText().toString();
                 final String password2 = userPassword2.getText().toString();
@@ -149,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void updateUserInfo(String name, Uri pickedImgUri, FirebaseUser currentUser) {
+    private void updateUserInfo(final String name, Uri pickedImgUri, final FirebaseUser currentUser) {
 
      //storage
         StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users Photos");
@@ -165,11 +166,43 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
 
+                        //uri
+
+
+                        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(name)
+                                .setPhotoUri(uri)
+                                .build();
+
+
+                        currentUser.updateProfile(profileUpdate)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        if (task.isSuccessful()){
+                                            //user info
+                                            showMessage("Register Complete");
+                                            updateUI();
+                                        }
+                                    }
+                                });
+
+
+
+
                     }
                 });
             }
         });
 
+    }
+
+    private void updateUI() {
+
+        Intent homeActivity =new Intent(getApplicationContext(),HomeActivity.class);
+        startActivity(homeActivity);
+        finish();
     }
 
     private void showMessage(String message) {
